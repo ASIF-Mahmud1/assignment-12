@@ -9,7 +9,11 @@ app.get('/', function(req,res)
 
 io.on('connection', function(socket)
 {
-     console.log('Listening on *:3000');
+    socket.on('chat message', function(msg)
+    {
+        //console.log('message: '+msg);
+        io.emit('chat message', msg);
+    });
 });
 
 http.listen(process.env.PORT, function()
